@@ -1,0 +1,682 @@
+body {
+    background-color: transparent;
+    color: white;
+    font-family: 'Roboto Mono', sans-serif;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+.header {
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3.75rem; /* 60px */
+    color: transparent;
+    padding: 0.625rem 1.25rem; /* 10px 20px */
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.header.inverted {
+    background-color: white;
+    color: black;
+    box-shadow: 0 0.25rem 0.5rem rgba(255, 255, 255, 0.3);
+}
+
+.header.inverted .name,
+.header.inverted .nav-links h2,
+.header.inverted .dropdown-content a {
+    color: black;
+}
+
+.header.inverted .dropdown-content a:hover {
+    background-color: transparent;
+    font-weight: bold;
+    color: black;
+}
+
+.header .name {
+    font-family: 'Roboto Mono', monospace;
+    color: white;
+    font-size: 1.75rem; /* 28px */
+    font-weight: 200;
+    margin: 0;
+    cursor: default;
+    margin-right: auto;
+    transition: color 0.5s ease;
+}
+#home {
+    margin: 0;
+    padding: 0;
+  }  
+.bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.25rem; /* 20px */
+    transform: translateX(-2.5rem); /* -40px */
+}
+
+.nav-links h2 {
+    font-family: 'DSEG14-Classic', 'Oxanium';
+    font-weight: 200;
+    font-size: 2rem; /* 24px */
+    margin: 0;
+    transition: font-weight 0.1s ease, color 0.5s ease;
+    cursor: pointer;
+}
+
+.nav-links h2:hover {
+    font-weight: bold;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: transparent;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    top: 100%;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 0.625rem 1rem; /* 10px 16px */
+    text-decoration: none;
+    display: block;
+    font-size: 1.125rem; /* 18px */
+    font-family: 'DSEG14-Classic', 'Oxanium';
+    font-weight: 1.5rem;
+    transition: color 0.5s ease, font-weight 0.2s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: transparent;
+    font-weight: bold;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 4.375rem); /* 70px */
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 2.5rem; /* 40px */
+}
+
+p {
+    font-size: 2.5rem; /* 40px */
+    font-family: 'Roboto mono';
+}
+
+.about-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    overflow: visible;
+    background-color: transparent;
+    color: white;
+}
+
+.about-section h2 {
+    font-family: 'Roboto Mono';
+    font-size: 2.25rem; /* 36px */
+    margin-bottom: 1.25rem; /* 20px */
+}
+
+.about-section p {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.5625rem; /* 25px */
+    font-weight: 600;
+    color: #4169e1;
+    text-shadow: 0 0 0.625rem #1e3cae, 0 0 1.25rem #1e3cae, 0 0 1.875rem rgba(65, 105, 225, 0.8);
+    margin: 0.1875rem; /* 3px */
+}
+
+.lower-text {
+    margin-top: 1.875rem; /* 30px */
+}
+
+canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+}
+.about-text.show {
+    opacity: 1;
+}
+
+.hidden {
+    display: block;
+    opacity: 0;
+}
+/* Updated section */
+.exclamation {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.greeting {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: black;
+    white-space: nowrap;
+    opacity: 0;
+    z-index: 12;
+}
+
+.excl-mark {
+    font-family: 'Roboto Mono', monospace;
+    color: black;
+    line-height: 1;
+    z-index: 13;
+    margin-bottom: 0.125rem; /* 2px */
+}
+
+#dot-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 11;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    background-color: white;
+}
+
+#canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.about-section {
+    position: relative;
+    display: flex;
+    /*flex-direction: column;*/
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh; /* Full viewport height */
+    background-color: transparent;
+    color: white;
+    z-index: 12;
+}
+
+.about-text.show 
+.center-text.show,
+.left-text.show,
+.about-image.show,
+.bottom-left-text.show,
+.courses-label.show, 
+.date-text.show{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.center-text {
+    position: relative;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 2rem; /* or whatever size you want */
+    color: black;
+    text-align: center;
+    z-index: 12;
+    margin-top: 3rem;
+    opacity: 0;
+    transform: translateY(20px); /* start slightly lower */
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.left-text {
+    position: relative;
+    text-align: center;
+    font-family: 'Roboto Mono', monospace;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-top: 5rem;
+    font-size: 1.75rem;
+    color: black;
+    z-index: 12;
+    opacity: 0;
+    transform: translateY(20px); /* start slightly lower */
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.about-image {
+    position: relative;
+    max-width: 1000px;
+    width: 100%;
+    height: auto;
+    margin-top: 2rem;
+    z-index: 12;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.bottom-left-text {
+    position: relative;
+    left: 1rem;
+    font-family: 'DSEG14-Classic', 'Oxanium';
+    font-size: 2rem;
+    color: #0000FF;
+    text-align: left;
+    z-index: 12;
+    opacity: 0;
+    transform: translateY(20px); /* start slightly lower */
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    word-spacing: 0.5rem; 
+}
+.courses-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 12;
+     /* start slightly lower */
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.arrow {
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: black; /* or white, depending on your background */
+    cursor: pointer;
+    z-index: 12;
+    opacity: 1;
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
+}
+
+.arrow.left { left: 10px; }
+.arrow.right { right: 10px; }
+
+.courses-carousel {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    width: 100%; /* adjust to make it wider or narrower */
+    scroll-behavior: smooth;
+    z-index: 12;
+    opacity: 1;
+    min-width: 0;
+}
+.carousel-track {
+    display: flex;
+    gap: 1rem;
+    transition: transform 0.5s ease;
+    will-change: transform;
+}
+.course {
+    width: 100%;
+    flex: 0 0 calc(50% - 0.5rem);
+    max-width: none;
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 0; /* REMOVE margin so 2 fit exactly */
+    color: black;
+    font-family: 'Roboto Mono', monospace;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+    box-sizing: border-box; /* makes padding count within 50% */
+}
+
+
+.course:hover {
+    transform: translateY(-5px);
+}
+
+.course-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+
+}
+
+.course-image {
+    width: 100%;              /* make images consistent in width */
+    height: 400px;            /* FIXED HEIGHT — adjust as needed */
+    object-fit: contain;        /* fills the box, cropping as needed */
+    border-radius: 0.5rem;
+    color: white;
+    display: block;
+    margin-bottom: 0.75rem;
+    border: none;
+    outline: none;
+}
+
+
+.course-description {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    min-height: 220px;
+}
+
+.course-skills {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.course-skills li {
+    font-size: 0.9rem;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 0.3rem 0.6rem;
+    margin: 0.2rem;
+    display: inline-block;
+    border-radius: 0.5rem;
+}
+
+
+.projects-section {
+    margin-right: 2px;
+    margin-left: 2px;
+    text-align: center;
+    margin-top: 5rem; /* Adjust for spacing from skills section */
+    margin-bottom: 2.5rem;
+    background-color: transparent; /* Ensure it's not hidden */
+    z-index: 12; /* Make sure it's above other content */
+    position: relative; /* Ensure it's placed correctly */
+}
+.contributed-text {
+    position: relative;
+    left: 1rem;
+    font-family: 'DSEG14-Classic', 'Oxanium';
+    font-size: 2rem;
+    color: #0000FF;
+    text-align: left;
+    z-index: 12;
+    opacity: 1;
+    word-spacing: 0.5rem; 
+    margin-bottom: 2rem;
+}
+
+  
+.text-content {
+    margin-left: 1rem;
+    text-align: left;
+    z-index: 12;
+    opacity: 1;
+    position: relative;
+}
+/*new*/
+.project-title {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.5rem;
+    color: black;
+    margin-bottom: 0.5rem;
+    text-align: center;
+
+}
+
+.project-skills {
+    margin-bottom: 0.5rem;
+    opacity: 1;
+    z-index: 13;
+}
+
+.skill-tag {
+    font-size: 0.9rem;
+    font-family: 'Roboto Mono', monospace;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 0.3rem 0.6rem;
+    display: inline-block;
+    border-radius: 0.5rem;
+    text-align: left;
+    margin-bottom: 0.5rem;
+    opacity: 1;
+    z-index: 13;
+    
+}
+
+.project-description {
+    font-family: 'Roboto Mono', monospace;;
+    font-size: 1rem;
+    color: black;
+    margin: 0;
+    line-height: 1.6;
+    opacity: 1;
+    z-index: 13;
+}
+
+  
+.projects-container {
+    max-width: 90%;
+    margin: auto;
+    opacity: 1;
+    z-index: 13;
+  }
+  
+  .tab-bar {
+    display: flex;
+    border-bottom: 3px solid white;
+    overflow-x: auto;
+    opacity: 1;
+    z-index: 13;
+  }
+  
+.tab {
+    padding: 1rem 2rem;
+    cursor: pointer;
+    background: #4169e1; /* Lighter Royal Blue */
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    opacity: 1;
+    z-index: 13;
+
+  }
+  
+.tab:hover {
+    background: #365acb; /* Slightly darker on hover */
+    opacity: 1;
+    z-index: 13;
+  }
+  
+.tab.active {
+    background: #2745b6; /* Darker Royal Blue for active tab */
+    border-bottom: 3px solid white;
+    color: white;
+    opacity: 1;
+    z-index: 13;
+  }
+  
+  
+.project-content {
+    display: none;
+    position: relative;
+    z-index: 13;
+}
+.project-content.active {
+    display: block;
+  }
+  
+.media-text-container {
+    display: flex;
+    align-items: flex-start;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+.media-content {
+    flex: 1;                    /* take up 50% of the container */
+    display: flex;
+    padding-right: 1rem;
+    flex-direction: column;
+  }
+  
+
+.description-content {
+    flex: 2;
+
+  }
+.media-content:empty {
+    display: none;
+  }
+  
+  /* Make image/video scale nicely */
+  .media-content img,
+  .media-content video {
+    max-width: 100%;
+    height: auto; 
+    z-index: 12;
+    opacity: 1;
+  }
+  
+.divider-image {
+    position: relative;
+    width: 100%;              /* make images consistent in width */
+    height: 400px;            /* FIXED HEIGHT — adjust as needed */
+    object-fit: contain;        /* fills the box, cropping as needed */
+    border-radius: 0.5rem;
+    color: white;
+    display: block;
+    margin-bottom: 0.75rem;
+    border: none;
+    outline: none;
+    z-index: 12;
+    opacity: 1;
+}
+.interests-section {
+    background-color: #f0f0f0; /* optional */
+    z-index: 12;
+    opacity: 1;
+  }
+  
+.video-container {
+    display: flex;
+    margin-top: 1rem;
+    opacity: 1;
+    z-index: 12;
+  }
+  
+.video-box {
+    flex: 1;
+    opacity: 1;
+    z-index: 12;
+    position: relative;
+  }
+  
+.video-box video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* optional */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* optional */
+    opacity: 1;
+    z-index: 12;
+  }
+.overlay-text {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'DSEG14-Classic', 'Oxanium', sans-serif;
+    font-size: 2rem;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    opacity: 1;
+    z-index: 13;
+    
+  }
+  
+
+.contact-section {
+
+    background-color: #f0f0f0; /* optional */
+    z-index: 12;
+    opacity: 1;
+  }
+
+/* Add space between sections */
+
+
+.contact-text {
+    position: relative;
+    left: 1rem;
+    font-family: 'DSEG14-Classic', 'Oxanium';
+    font-size: 2rem;
+    color: #0000FF;
+    text-align: left;
+    z-index: 12;
+    opacity: 1;
+    word-spacing: 0.5rem; 
+}
+.contact-content {
+    display: flex;
+    align-items: center; /* vertically aligns image and text */
+    justify-content: center; /* horizontally centers the pair */
+    gap: 1rem; /* spacing between image and text */
+    flex-wrap: nowrap; /* allows wrapping on small screens */
+    margin-top: 2rem;
+}
+.contact-img{
+    position: relative;
+    width: 80%;
+    height: auto;
+    display: block; 
+    z-index: 12;
+    opacity: 1;
+}
+.contact-img img {
+    width: 80%;
+    height: auto;
+    display: block;
+}
+
+.contact-description {
+    font-family: 'Roboto Mono', monospace;;
+    position: relative;
+    font-size: 1.5rem;
+    color: black;
+    margin: 0;
+    line-height: 1.6;
+    opacity: 1;
+    z-index: 12;
+}
