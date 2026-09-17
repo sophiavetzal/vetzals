@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================
   // DOT ANIMATION
   // =========================
-
+/*
   function startAnimation() {
     if (animationStarted) return;
 
@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
       window.scrollTo(0, 0);
     }
   }
-
+*/
   // =========================
   // USER ACTIVITY
   // =========================
