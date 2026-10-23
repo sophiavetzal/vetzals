@@ -680,3 +680,69 @@ canvas {
     opacity: 1;
     z-index: 12;
 }
+/* Tablets and below */
+@media (max-width: 900px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .name { font-size: 1.6rem; }
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  .nav-links h2 { font-size: 1rem; }
+
+  /* About section: stack text and image */
+  .about-content,
+  .about-text {
+    flex-direction: column;
+    width: 100%;
+    padding: 0 16px;
+  }
+  .about-image { max-width: 100%; height: auto; }
+
+  /* Project layout: stack media above the description */
+  .media-text-container {
+    flex-direction: column;
+  }
+  .media-content,
+  .description-content {
+    width: 100%;
+  }
+  .media-content img,
+  .media-content video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Interests: stack the three videos */
+  .video-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .video-box { width: 90%; }
+
+  /* Contact: stack photo and text */
+  .contact-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .contact-img img { max-width: 70%; height: auto; }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  .tab-bar {
+    overflow-x: auto;          /* tabs scroll sideways instead of overflowing */
+    white-space: nowrap;
+  }
+  .course { min-width: 100%; }  /* one course card per carousel slide */
+  .course-description,
+  .project-description { font-size: 0.9rem; }
+  .contributed-text,
+  .contact-text { font-size: 1.3rem; text-align: center; }
+}
