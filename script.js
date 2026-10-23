@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
   showAllText();
 
 
-  // =========================
+    // =========================
   // COURSES CAROUSEL
   // =========================
 
@@ -51,73 +51,73 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (viewport) {
     const track = viewport.querySelector(".carousel-track");
+    const cards = track ? track.querySelectorAll(".course") : [];
     const leftArrow = document.querySelector(".arrow.left");
     const rightArrow = document.querySelector(".arrow.right");
 
-    if (track && leftArrow && rightArrow) {
+    if (track && cards.length && leftArrow && rightArrow) {
+      let index = 0; // index of the first visible card
 
-      let pageIndex = 0;
-
-      function update() {
-        const viewportWidth =
-          viewport.getBoundingClientRect().width;
-
-        const trackWidth = track.scrollWidth;
-        const maxOffset = trackWidth - viewportWidth;
-
-        let offset = pageIndex * viewportWidth;
-
-        if (offset > maxOffset) {
-          offset = maxOffset;
-        }
-
-        track.style.transform =
-          `translateX(-${offset}px)`;
+      function getGap() {
+        const styles = getComputedStyle(track);
+        return parseFloat(styles.columnGap || styles.gap) || 0;
       }
 
-      function computeMaxPage() {
-        const viewportWidth =
-          viewport.getBoundingClientRect().width;
+      function cardStep() {
+        return cards[0].getBoundingClientRect().width + getGap();
+      }
 
-        const trackWidth = track.scrollWidth;
-
+      // 2 on desktop, 1 on phones (works out of the real card width)
+      function cardsPerView() {
         return Math.max(
-          0,
-          Math.ceil(trackWidth / viewportWidth) - 1
+          1,
+          Math.round((viewport.clientWidth + getGap()) / cardStep())
         );
       }
 
-      rightArrow.addEventListener("click", () => {
-        const maxPage = computeMaxPage();
+      function maxIndex() {
+        return Math.max(0, cards.length - cardsPerView());
+      }
 
-        if (pageIndex < maxPage) {
-          pageIndex++;
-          update();
-        }
+      function update() {
+        index = Math.min(Math.max(index, 0), maxIndex());
+        track.style.transform = `translateX(-${index * cardStep()}px)`;
+
+        // dim arrows at the ends
+        leftArrow.style.opacity = index === 0 ? 0.3 : 1;
+        rightArrow.style.opacity = index >= maxIndex() ? 0.3 : 1;
+      }
+
+      rightArrow.addEventListener("click", () => {
+        index += cardsPerView();
+        update();
       });
 
       leftArrow.addEventListener("click", () => {
-        if (pageIndex > 0) {
-          pageIndex--;
+        index -= cardsPerView();
+        update();
+      });
+
+      // Swipe support for touch screens
+      let touchStartX = 0;
+
+      viewport.addEventListener("touchstart", (e) => {
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+
+      viewport.addEventListener("touchend", (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 50) {
+          index += dx < 0 ? cardsPerView() : -cardsPerView();
           update();
         }
       });
 
-      window.addEventListener("resize", () => {
-        const maxPage = computeMaxPage();
-
-        if (pageIndex > maxPage) {
-          pageIndex = maxPage;
-        }
-
-        update();
-      });
+      window.addEventListener("resize", update);
 
       update();
     }
   }
-
-
   // =========================
   // PROJECTS SECTION
   // =========================
